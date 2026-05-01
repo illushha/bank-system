@@ -31,10 +31,17 @@ public class TransactionController {
     @PostMapping("/transfer")
     public String transfer(@RequestParam Long fromId,
                            @RequestParam Long toId,
-                           @RequestParam double amount) {
+                           @RequestParam double amount,
+                           Model model) {
+        try {
+            transactionService.transfer(fromId, toId, amount);
+            model.addAttribute("message", "Переказ виконано успішно");
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+        }
 
-        transactionService.transfer(fromId, toId, amount);
-        return "redirect:/accounts";
+        model.addAttribute("accounts", accountRepository.findAll());
+        return "transfer";
     }
     @GetMapping("/transactions")
     public String history(Model model) {

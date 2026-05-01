@@ -23,8 +23,16 @@ public class TransactionService {
         Account from = accountRepository.findById(fromId).orElseThrow();
         Account to = accountRepository.findById(toId).orElseThrow();
 
+        if (amount <= 0) {
+            throw new RuntimeException("Сума переказу має бути більшою за 0");
+        }
+
+        if (from.getId().equals(to.getId())) {
+            throw new RuntimeException("Не можна переказувати кошти на той самий рахунок");
+        }
+
         if (from.getBalance() < amount) {
-            throw new RuntimeException("Недостатньо коштів");
+            throw new RuntimeException("Недостатньо коштів на рахунку");
         }
 
         from.setBalance(from.getBalance() - amount);

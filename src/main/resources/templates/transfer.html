@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <body>
+
 <a href="/">⬅ На головну</a>
 
 <h1>Переказ грошей</h1>
 
+<p style="color: green;" th:if="${message}" th:text="${message}"></p>
+<p style="color: red;" th:if="${error}" th:text="${error}"></p>
 
 <form action="/transfer" method="post">
 
@@ -12,29 +15,33 @@
     <select name="fromId">
         <option th:each="a : ${accounts}"
                 th:value="${a.id}"
-                th:text="${a.number}">
+                th:text="${a.number + ' | баланс: ' + a.balance}">
         </option>
     </select>
 
-    <br>
+    <br><br>
 
     На рахунок:
     <select name="toId">
         <option th:each="a : ${accounts}"
                 th:value="${a.id}"
-                th:text="${a.number}">
+                th:text="${a.number + ' | баланс: ' + a.balance}">
         </option>
     </select>
 
-    <br>
+    <br><br>
 
     Сума:
-    <input type="number" name="amount">
+    <input type="number" name="amount" step="0.01">
 
     <br><br>
-    <button type="submit">Переказати</button>
 
+    <button type="submit">Переказати</button>
 </form>
+
+<br>
+
+<a href="/accounts">⬅ До рахунків</a>
 
 </body>
 </html>
