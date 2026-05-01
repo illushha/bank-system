@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Новий рахунок</h1>
+
+<form action="/accounts" method="post">
+
+    Номер картки (можна пусто):
+    <input type="text" name="number"><br>
+
+    Баланс:
+    <input type="number" name="balance"><br>
+
+    Клієнт:
+    <select name="clientId">
+        <option th:each="c : ${clients}"
+                th:value="${c.id}"
+                th:text="${c.name}">
+        </option>
+    </select>
+
+    <br><br>
+    <button type="submit">Зберегти</button>
+
+</form>
+
+</body>
+</html>

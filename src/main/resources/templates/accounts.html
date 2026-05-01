@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Рахунки</h1>
+
+<a href="/accounts/add">Додати рахунок</a>
+
+<ul>
+    <li th:each="acc : ${accounts}">
+        <span th:text="${acc.number}"></span> -
+        <span th:text="${acc.balance}"></span> -
+        <span th:text="${acc.client != null ? acc.client.name : 'Без клієнта'}"></span>
+    </li>
+</ul>
+
+</body>
+</html>
