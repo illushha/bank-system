@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    width: 500px;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+a {
+    font-size: 16px;
+}
+
+button {
+    font-size: 16px;
+    padding: 12px 18px;
+}
+
+input, select {
+    font-size: 16px;
+    padding: 10px;
+}
