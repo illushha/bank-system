@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Переказ грошей</h1>
+
+<form action="/transfer" method="post">
+
+    З рахунку:
+    <select name="fromId">
+        <option th:each="a : ${accounts}"
+                th:value="${a.id}"
+                th:text="${a.number}">
+        </option>
+    </select>
+
+    <br>
+
+    На рахунок:
+    <select name="toId">
+        <option th:each="a : ${accounts}"
+                th:value="${a.id}"
+                th:text="${a.number}">
+        </option>
+    </select>
+
+    <br>
+
+    Сума:
+    <input type="number" name="amount">
+
+    <br><br>
+    <button type="submit">Переказати</button>
+
+</form>
+
+</body>
+</html>
