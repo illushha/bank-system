@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clients</title>
+</head>
+<body>
+<h1>Клієнти</h1>
+
+<a href="/clients/add">Додати клієнта</a>
+
+<ul>
+  <li th:each="client : ${clients}">
+    <span th:text="${client.name}"></span> -
+    <span th:text="${client.email}"></span>
+  </li>
+</ul>
+
+</body>
+</html>
