@@ -4,48 +4,45 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
 <div class="container">
 
-<a href="/">⬅ На головну</a>
+    <a href="/">⬅ На головну</a>
 
-<h1>Переказ грошей</h1>
+    <h1>Переказ грошей</h1>
 
-<p style="color: green;" th:if="${message}" th:text="${message}"></p>
-<p style="color: red;" th:if="${error}" th:text="${error}"></p>
+    <div class="success-message" th:if="${message}" th:text="${message}"></div>
+    <div class="error-message" th:if="${error}" th:text="${error}"></div>
 
-<form action="/transfer" method="post">
+    <form action="/transfer" method="post">
 
-    З рахунку:
-    <select name="fromId">
-        <option th:each="a : ${accounts}"
-                th:value="${a.id}"
-                th:text="${a.number + ' | баланс: ' + a.balance}">
-        </option>
-    </select>
+        <label>З рахунку:</label>
+        <select name="fromId">
+            <option th:each="a : ${accounts}"
+                    th:value="${a.id}"
+                    th:text="${a.number + ' | баланс: ' + a.balance}">
+            </option>
+        </select>
 
-    <br><br>
+        <label>На рахунок:</label>
+        <select name="toId">
+            <option th:each="a : ${accounts}"
+                    th:value="${a.id}"
+                    th:text="${a.number + ' | баланс: ' + a.balance}">
+            </option>
+        </select>
 
-    На рахунок:
-    <select name="toId">
-        <option th:each="a : ${accounts}"
-                th:value="${a.id}"
-                th:text="${a.number + ' | баланс: ' + a.balance}">
-        </option>
-    </select>
+        <label>Сума:</label>
+        <input type="number" name="amount" step="0.01">
 
-    <br><br>
+        <button type="submit">Переказати</button>
+    </form>
 
-    Сума:
-    <input type="number" name="amount" step="0.01">
+    <br>
 
-    <br><br>
+    <a href="/accounts">⬅ До рахунків</a>
 
-    <button type="submit">Переказати</button>
-</form>
-
-<br>
-
-<a href="/accounts">⬅ До рахунків</a>
 </div>
+
 </body>
 </html>
