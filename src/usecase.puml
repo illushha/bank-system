@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+actor "Користувач" as User
+actor "Адміністратор" as Admin
+
+rectangle "Банківська система" {
+
+    usecase "Реєстрація" as UC1
+    usecase "Авторизація" as UC2
+
+    usecase "Перегляд рахунків" as UC3
+    usecase "Створення рахунку" as UC4
+
+    usecase "Поповнення рахунку" as UC5
+    usecase "Зняття коштів" as UC6
+    usecase "Переказ коштів" as UC7
+
+    usecase "Історія транзакцій" as UC8
+
+    usecase "Керування користувачами" as UC9
+    usecase "Блокування рахунку" as UC10
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+
+Admin --> UC2
+Admin --> UC3
+Admin --> UC8
+Admin --> UC9
+Admin --> UC10
+
+UC5 .> UC2 : <<include>>
+UC6 .> UC2 : <<include>>
+UC7 .> UC2 : <<include>>
+
+@enduml

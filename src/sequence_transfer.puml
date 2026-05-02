@@ -1,0 +1,40 @@
+@startuml
+
+actor "Користувач" as User
+
+participant "Інтерфейс системи" as UI
+participant "BankService" as Service
+participant "AccountRepository" as AccountRepo
+participant "TransactionRepository" as TransactionRepo
+database "База даних" as DB
+
+User -> UI : Вводить дані переказу
+UI -> Service : transfer(fromAccount, toAccount, amount)
+
+Service -> AccountRepo : findById(fromAccount)
+AccountRepo -> DB : Запит рахунку відправника
+DB --> AccountRepo : Дані рахунку
+AccountRepo --> Service : Рахунок відправника
+
+Service -> AccountRepo : findById(toAccount)
+AccountRepo -> DB : Запит рахунку отримувача
+DB --> AccountRepo : Дані рахунку
+AccountRepo --> Service : Рахунок отримувача
+
+Service -> Service : Перевірка балансу
+
+alt Коштів достатньо
+    Service -> AccountRepo : save(updatedAccounts)
+    AccountRepo -> DB : Оновлення балансів
+
+    Service -> TransactionRepo : save(transaction)
+    TransactionRepo -> DB : Збереження транзакції
+
+    Service --> UI : Переказ виконано успішно
+    UI --> User : Повідомлення про успіх
+else Недостатньо коштів
+    Service --> UI : Помилка переказу
+    UI --> User : Повідомлення про недостатній баланс
+end
+
+@enduml

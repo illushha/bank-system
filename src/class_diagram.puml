@@ -1,0 +1,74 @@
+@startuml
+
+class User {
+    - Long id
+    - String username
+    - String password
+    - String fullName
+    - String email
+    + login()
+    + logout()
+}
+
+class Admin {
+    + manageUsers()
+    + blockAccount()
+}
+
+class Account {
+    - Long id
+    - String accountNumber
+    - BigDecimal balance
+    - String status
+    + deposit(amount)
+    + withdraw(amount)
+    + transfer(amount, targetAccount)
+}
+
+class Transaction {
+    - Long id
+    - BigDecimal amount
+    - String type
+    - Date date
+    - String status
+}
+
+class BankService {
+    + createAccount(user)
+    + deposit(account, amount)
+    + withdraw(account, amount)
+    + transfer(fromAccount, toAccount, amount)
+    + getTransactionHistory(account)
+}
+
+class UserRepository {
+    + save(user)
+    + findById(id)
+    + findAll()
+}
+
+class AccountRepository {
+    + save(account)
+    + findById(id)
+    + findByUser(user)
+}
+
+class TransactionRepository {
+    + save(transaction)
+    + findByAccount(account)
+}
+
+User <|-- Admin
+
+User "1" --> "0..*" Account : owns
+Account "1" --> "0..*" Transaction : has
+
+BankService --> UserRepository
+BankService --> AccountRepository
+BankService --> TransactionRepository
+
+UserRepository --> User
+AccountRepository --> Account
+TransactionRepository --> Transaction
+
+@enduml
